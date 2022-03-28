@@ -4,12 +4,6 @@ import entity.users.Administrator;
 
 import java.util.Collection;
 
-public interface AdministratorService {
-    Collection<Administrator> getAdmin();
+public interface AdministratorService extends GenericService<Long,Administrator> {
 
-    Administrator addAdmin(Administrator admin);
-
-    Administrator updateAdmin(Administrator admin);
-
-    Administrator deleteAdmin(Administrator admin);
 }

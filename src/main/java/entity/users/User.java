@@ -1,12 +1,10 @@
 package entity.users;
 
-import dao.Identifiable;
+
 import entity.AbstractEntity;
 import entity.enums.Role;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
-import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
 @Getter

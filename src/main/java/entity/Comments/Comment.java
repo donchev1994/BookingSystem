@@ -1,6 +1,7 @@
 package entity.Comments;
 
 
+import dao.Identifiable;
 import entity.AbstractEntity;
 import entity.users.RegisteredUser;
 import lombok.AllArgsConstructor;
@@ -13,8 +14,8 @@ import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
-    //Date, Id registeredUser
+public class Comment extends AbstractEntity implements Identifiable<Long> {
+
 
     private String description;
     private LocalDate publishedDate;

@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class Room extends AbstractEntity implements Identifiable<Long> {
 
-
     private TypeOfRoom typeOfRoom;
     private String description;
     private double pricePerDay;

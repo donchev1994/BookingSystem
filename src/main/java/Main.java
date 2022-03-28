@@ -2,6 +2,7 @@ import dao.RegisterUserRepository;
 import dao.impl.RegisterUserRepositoryImpl;
 import entity.users.RegisteredUser;
 import entity.users.User;
+import exception.NonexistentEntityException;
 import service.RegisterUserService;
 import service.impl.RegisterUserServiceImpl;
 
@@ -31,17 +32,29 @@ public class Main {
         RegisterUserService userService = new RegisterUserServiceImpl(us);
 
         for (RegisteredUser mockUser : MOCK_USERS) {
-            userService.addUser(mockUser);
+            userService.save(mockUser);
         }
 
 
-        RegisteredUser user2 = userService.findById(2L);
+        RegisteredUser user2 = null;
+        try {
+            user2 = userService.findById(2L);
+        } catch (NonexistentEntityException e) {
+            e.printStackTrace();
+        }
         user2.setEmail("gosho");
-        userService.updateUser(user2);
+        userService.update(user2);
 
-        userService.getUsers().forEach(System.out::println);
+        try {
+            userService.getAll().forEach(System.out::println);
+        } catch (NonexistentEntityException e) {
+            e.printStackTrace();
+        }
 
 
         System.out.println();
+
+
+
     }
 }

@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.CrudRepository;
 import dao.Identifiable;
+import exception.NonexistentEntityException;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,7 +27,12 @@ public abstract class CrudRepositoryImpl<K, V extends Identifiable<K>> implement
 
     @Override
     public V update(V entity) {
-        V old = findById(entity.getId());
+        V old = null;
+        try {
+            old = findById(entity.getId());
+        } catch (NonexistentEntityException e) {
+            e.printStackTrace();
+        }
         if (old == null) {
             throw new IllegalStateException("its null");
         }
@@ -44,7 +50,7 @@ public abstract class CrudRepositoryImpl<K, V extends Identifiable<K>> implement
     }
 
     @Override
-    public V findById(K id) {
+    public V findById(K id) throws NonexistentEntityException {
         return entities.get(id);
     }
 }

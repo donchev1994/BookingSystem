@@ -1,34 +1,16 @@
 package service.impl;
 
-import dao.AdministratorRepository;
+
+import dao.CrudRepository;
 import entity.users.Administrator;
+import service.AdministratorService;
 
-import java.util.Collection;
 
-public class AdministratorServiceImpl implements service.AdministratorService {
-    AdministratorRepository adminRepo;
+public class AdministratorServiceImpl extends GenericServiceImpl<Long,Administrator>
+        implements AdministratorService {
 
-    public AdministratorServiceImpl(AdministratorRepository adminRepo) {
-        this.adminRepo = adminRepo;
-    }
-
-    @Override
-    public Collection<Administrator> getAdmin() {
-        return adminRepo.read();
-    }
-
-    @Override
-    public Administrator addAdmin(Administrator admin) {
-        return adminRepo.create(admin);
-    }
-
-    @Override
-    public Administrator updateAdmin(Administrator admin) {
-        return adminRepo.update(admin);
-    }
-
-    @Override
-    public Administrator deleteAdmin(Administrator admin) {
-        return adminRepo.delete(admin);
+    public AdministratorServiceImpl(CrudRepository<Long, Administrator> genericRepository) {
+        super(genericRepository);
     }
 }
+

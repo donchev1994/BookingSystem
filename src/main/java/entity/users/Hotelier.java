@@ -2,6 +2,7 @@ package entity.users;
 
 import dao.Identifiable;
 import lombok.NonNull;
+import lombok.ToString;
 
 
 public class Hotelier extends User implements Identifiable<Long> {
