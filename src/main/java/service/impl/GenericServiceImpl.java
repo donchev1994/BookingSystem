@@ -3,6 +3,7 @@ package service.impl;
 import dao.CrudRepository;
 import dao.Identifiable;
 import entity.AbstractEntity;
+import exception.InvalidEntityDataException;
 import exception.NonexistentEntityException;
 import lombok.AllArgsConstructor;
 import service.GenericService;
@@ -28,12 +29,13 @@ public class GenericServiceImpl<K,V extends Identifiable<K>> implements GenericS
     }
 
     @Override
-    public V save(V entity) {
+    public V save(V entity) throws InvalidEntityDataException {
         return genericRepository.create(entity);
     }
 
     @Override
     public V update(V entity) {
+
         return genericRepository.update(entity);
     }
 
@@ -47,7 +49,7 @@ public class GenericServiceImpl<K,V extends Identifiable<K>> implements GenericS
         try{
             return genericRepository.findById(id);
         } catch (NonexistentEntityException ex){
-            throw new NonexistentEntityException("Invalid id");
+            throw new NonexistentEntityException("Entity with ID='" + id + "' does not exist.");
         }
     }
 }

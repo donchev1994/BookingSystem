@@ -2,6 +2,7 @@ import dao.RegisterUserRepository;
 import dao.impl.RegisterUserRepositoryImpl;
 import entity.users.RegisteredUser;
 import entity.users.User;
+import exception.InvalidEntityDataException;
 import exception.NonexistentEntityException;
 import service.RegisterUserService;
 import service.impl.RegisterUserServiceImpl;
@@ -32,9 +33,20 @@ public class Main {
         RegisterUserService userService = new RegisterUserServiceImpl(us);
 
         for (RegisteredUser mockUser : MOCK_USERS) {
-            userService.save(mockUser);
+            try {
+                userService.save(mockUser);
+            } catch (InvalidEntityDataException e) {
+                e.printStackTrace();
+            }
         }
 
+//        var invalidUser = new RegisteredUser("1","2","3","4","5");
+
+//        try {
+//            userService.save(invalidUser);
+//        } catch (InvalidEntityDataException e) {
+//            e.printStackTrace();
+//        }
 
         RegisteredUser user2 = null;
         try {
