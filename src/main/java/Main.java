@@ -32,6 +32,8 @@ public class Main {
         RegisterUserRepository us = new RegisterUserRepositoryImpl();
         RegisterUserService userService = new RegisterUserServiceImpl(us);
 
+        // Тест на един Generic Service
+
         for (RegisteredUser mockUser : MOCK_USERS) {
             try {
                 userService.save(mockUser);
@@ -40,20 +42,33 @@ public class Main {
             }
         }
 
-//        var invalidUser = new RegisteredUser("1","2","3","4","5");
 
+        var first = new RegisteredUser("Marian24","Donchev","marian","password","email");
+
+        try {
+            userService.save(first);
+        } catch (InvalidEntityDataException e) {
+            e.printStackTrace();
+        }
+//        var invalidUser = new RegisteredUser("1","2","3","4","5");
+//
 //        try {
 //            userService.save(invalidUser);
 //        } catch (InvalidEntityDataException e) {
 //            e.printStackTrace();
 //        }
 
-        RegisteredUser user2 = null;
+        System.out.println();
+
+        var user2 = new RegisteredUser();
+
         try {
-            user2 = userService.findById(2L);
+            user2 = userService.findById(1L);
         } catch (NonexistentEntityException e) {
             e.printStackTrace();
         }
+
+
         user2.setEmail("gosho");
         userService.update(user2);
 
