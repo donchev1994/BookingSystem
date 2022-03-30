@@ -1,3 +1,4 @@
+import controller.UserController;
 import dao.RegisterUserRepository;
 import dao.impl.RegisterUserRepositoryImpl;
 import entity.users.RegisteredUser;
@@ -50,13 +51,7 @@ public class Main {
         } catch (InvalidEntityDataException e) {
             e.printStackTrace();
         }
-//        var invalidUser = new RegisteredUser("1","2","3","4","5");
-//
-//        try {
-//            userService.save(invalidUser);
-//        } catch (InvalidEntityDataException e) {
-//            e.printStackTrace();
-//        }
+
 
         System.out.println();
 
@@ -77,6 +72,9 @@ public class Main {
         } catch (NonexistentEntityException e) {
             e.printStackTrace();
         }
+
+        var userController = new UserController(userService);
+        userController.init();
 
 
         System.out.println();
