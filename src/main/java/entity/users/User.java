@@ -13,7 +13,7 @@ import java.util.StringJoiner;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class User extends AbstractEntity {
+public abstract class User extends AbstractEntity {
 
 
         @NonNull
