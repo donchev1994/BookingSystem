@@ -4,10 +4,8 @@ import entity.users.User;
 import exception.ConstraintViolation;
 import exception.ConstraintViolationException;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class UserValidator {
 

@@ -3,20 +3,28 @@ package controller;
 import entity.users.RegisteredUser;
 import exception.NonexistentEntityException;
 import service.RegisterUserService;
+import util.SqlConnector;
 import view.Menu;
-import view.NewBookingDialog;
+import view.NewRegisteredUserDialog;
+import view.NewCityDialog;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 
 public class UserController {
+
     public RegisterUserService registerUserService;
+    private SqlConnector connector = new SqlConnector();
+
 
     public UserController(RegisterUserService registerUserService) {
         this.registerUserService = registerUserService;
     }
 
-    public void init(){
+
+    public void init() {
         var menu = new Menu("User Menu", List.of(
                 new Menu.Option("Load Users", () -> {
                     System.out.println("Loading users ...");
@@ -34,12 +42,38 @@ public class UserController {
                     return "Total user count: " + users.size();
                 }),
                 new Menu.Option("Add New User", () -> {
-                    var user = new NewBookingDialog().input();
-                    var created = registerUserService.save(user);
+                    var user = new NewRegisteredUserDialog().input();
+                    connector.registerUser(user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.getEmail());
+//                    var created = registerUserService.save(user);
                     return String.format("User ID:%s: '%s' added successfully.",
-                            created.getId(), created.getFirstName());
+                            user.getId(), user.getFirstName());
+                }),
+                new Menu.Option("Get all cities", () -> {
+                    return connector.getAllCities();
+                }),
+                new Menu.Option("Add city", () -> {
+                    var city = new NewCityDialog().input();
+                    connector.addCity(city);
+                    return "City " + city.getName() + "is added correctly";
+                }),
+                new Menu.Option("Login", () -> {
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Username: ");
+                    var username = scanner.nextLine();
+                    System.out.println("Password: ");
+                    var password = scanner.nextLine();
+                    if(connector.login(username, password)){
+                       System.out.println("Login yes");
+                    } else {
+                       System.out.println("Login no");
+                    }
+                    return String.valueOf(connector.login(username, password));
                 })
+
         ));
         menu.show();
     }
+
+
+
 }

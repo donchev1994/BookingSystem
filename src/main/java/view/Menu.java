@@ -3,6 +3,7 @@ package view;
 import exception.InvalidEntityDataException;
 import lombok.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,10 +18,12 @@ public class Menu {
 
     @Getter
     @ToString
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class Option {
         private String text;
         private Command command;
+
     }
 
     public class ExitCommand implements Command {
@@ -63,6 +66,9 @@ public class Menu {
                 result = options.get(choice - 1).getCommand().execute();
             } catch (InvalidEntityDataException e) {
                 System.out.println("Error: " + e.getMessage());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
             System.out.println(result);
             if(choice == options.size()){

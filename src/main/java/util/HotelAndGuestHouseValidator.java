@@ -1,6 +1,5 @@
 package util;
 
-import entity.city.City;
 import entity.hotelAndHouse.Properties;
 import exception.ConstraintViolation;
 import exception.ConstraintViolationException;

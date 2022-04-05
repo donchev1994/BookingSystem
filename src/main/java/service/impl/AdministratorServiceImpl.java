@@ -2,50 +2,57 @@ package service.impl;
 
 
 import dao.AdministratorRepository;
-import dao.CrudRepository;
-import entity.users.AdminHoteliers;
+import dao.CityRepository;
+import entity.city.City;
 import entity.users.Administrator;
-import exception.ConstraintViolationException;
 import exception.InvalidEntityDataException;
+import exception.NonexistentEntityException;
 import service.AdministratorService;
-import util.UserValidator;
+
+import java.util.Collection;
 
 
-public class AdministratorServiceImpl extends GenericServiceImpl<Long,Administrator>
-        implements AdministratorService {
+public class AdministratorServiceImpl implements AdministratorService {
 
-    private AdministratorRepository administratorRepository;
-    private final UserValidator userValidator;
+    private AdministratorRepository adminRepo;
 
-
-    public AdministratorServiceImpl(CrudRepository<Long, Administrator> genericRepository) {
-        super(genericRepository);
-        this.userValidator = new UserValidator();
+    public AdministratorServiceImpl(AdministratorRepository adminRepo) {
+        this.adminRepo = adminRepo;
     }
 
-    public AdministratorServiceImpl(CrudRepository<Long, Administrator> genericRepository, UserValidator userValidator) {
-        super(genericRepository);
-        this.userValidator = userValidator;
+    public AdministratorServiceImpl(AdministratorRepository adminRepo, CityRepository cityRepo) {
+        this.adminRepo = adminRepo;
+    }
+
+
+    @Override
+    public void addCity(City city) {
+        adminRepo.addCity(city);
+    }
+
+    @Override
+    public Collection<Administrator> getAll() throws NonexistentEntityException {
+        return adminRepo.read();
     }
 
     @Override
     public Administrator save(Administrator entity) throws InvalidEntityDataException {
-        try {
-            userValidator.validate(entity);
-        } catch (ConstraintViolationException e) {
-            throw new InvalidEntityDataException(
-                    String.format("Error creating user  '%s'", entity.getFirstName()), e
-            );
-        }
-
-        return genericRepository.create(entity);
+        return adminRepo.create(entity);
     }
 
     @Override
-    public AdminHoteliers createAdminHotelier(AdminHoteliers entity) {
-        return administratorRepository.createAdminHotelier(entity);
+    public Administrator update(Administrator entity) {
+        return null;
     }
 
+    @Override
+    public Administrator delete(Administrator entity) {
+        return null;
+    }
 
+    @Override
+    public Administrator findById(Long id) throws NonexistentEntityException {
+        return null;
+    }
 }
 

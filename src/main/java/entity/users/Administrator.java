@@ -22,9 +22,7 @@ public class Administrator extends User implements Identifiable<Long> {
     private Map<Long,AdminRegUsers> adminRegUsers;
     private Role role = Role.ADMINISTRATOR;
 
-    public Administrator(@NonNull String firstName, @NonNull String lastName,
-                         @NonNull String username, @NonNull String password,
-                         @NonNull String email) {
+    public Administrator(@NonNull String firstName, @NonNull String lastName, @NonNull String username, @NonNull String password, @NonNull String email) {
         super(firstName, lastName, username, password, email);
 
     }
