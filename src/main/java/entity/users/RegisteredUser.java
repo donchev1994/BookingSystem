@@ -24,8 +24,4 @@ public class RegisteredUser extends User implements Identifiable<Long> {
         super(firstName, lastName, username, password, email);
         setRole(USER);
     }
-
-    public RegisteredUser() {
-
-    }
 }

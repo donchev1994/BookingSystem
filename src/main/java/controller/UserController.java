@@ -8,7 +8,6 @@ import view.Menu;
 import view.NewRegisteredUserDialog;
 import view.NewCityDialog;
 
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
@@ -43,7 +42,7 @@ public class UserController {
                 }),
                 new Menu.Option("Add New User", () -> {
                     var user = new NewRegisteredUserDialog().input();
-                    connector.registerUser(user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.getEmail());
+                    connector.registerUser(user.getFirstName(),user.getLastName(),user.getUsername(),user.getPassword(),user.getEmail());
 //                    var created = registerUserService.save(user);
                     return String.format("User ID:%s: '%s' added successfully.",
                             user.getId(), user.getFirstName());
@@ -55,25 +54,11 @@ public class UserController {
                     var city = new NewCityDialog().input();
                     connector.addCity(city);
                     return "City " + city.getName() + "is added correctly";
-                }),
-                new Menu.Option("Login", () -> {
-                    Scanner scanner = new Scanner(System.in);
-                    System.out.println("Username: ");
-                    var username = scanner.nextLine();
-                    System.out.println("Password: ");
-                    var password = scanner.nextLine();
-                    if(connector.login(username, password)){
-                       System.out.println("Login yes");
-                    } else {
-                       System.out.println("Login no");
-                    }
-                    return String.valueOf(connector.login(username, password));
                 })
 
         ));
         menu.show();
     }
-
 
 
 }

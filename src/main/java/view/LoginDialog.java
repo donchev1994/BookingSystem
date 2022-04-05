@@ -10,23 +10,8 @@ public class LoginDialog implements EntityDialog<RegisteredUser> {
 
     @Override
     public RegisteredUser input() {
-        var user = new User();
-        while(user.getEmail() == null){
-            System.out.println("Username: ");
-            var answer = scanner.nextLine();
-            user.setEmail(answer);
-
-        }
-
-        while (user.getPassword() == null){
-            System.out.println("Password: ");
-            var answer = scanner.nextLine();
-            if(user.getPassword().contains(answer)){
-
-            }
-
-        }
-
+        System.out.println("Username: ");
+        System.out.println("Password: ");
         return null;
     }
 }

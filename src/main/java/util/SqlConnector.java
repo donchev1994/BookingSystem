@@ -2,8 +2,11 @@ package util;
 
 
 import entity.city.City;
+import entity.users.RegisteredUser;
 import entity.users.User;
 
+import javax.swing.*;
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -57,31 +60,21 @@ public class SqlConnector {
         statement.executeUpdate();
     }
 
-    public boolean login(String username, String password) throws SQLException{
+    public void login() throws SQLException{
+        String query = "SELECT `username`, `password` FROM " +
+                "users WHERE username = ? AND password = ?";
+        boolean status = false;
 
-        boolean flag = false;
-        Statement statement = connection.createStatement();
-        ResultSet myResult = statement.executeQuery(
-                "SELECT username,password FROM users WHERE username = '" + username + "'" +
-                " AND password = '" + password + "'");
+        var user = new RegisteredUser();
 
-        if(myResult.next()){
-            flag =true;
-        } else {
-            System.out.println("Invalid");
-        }
-//        User user = null;
-//
-//        if(myResult.next()){
-//            user = new User();
-//            user.setUsername(username);
-//        }
-//
-//        return user;
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1,user.getUsername());
+        statement.setString(2,user.getPassword());
 
-        return flag;
+        ResultSet myResult = statement.executeQuery();
+        status = myResult.next();
+
     }
-
 
     public User registerUser(String firstName,String lastName,String username,String password, String email){
         var user = new User();
