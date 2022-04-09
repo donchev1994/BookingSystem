@@ -11,4 +11,5 @@ public interface HotelierService extends GenericService<Long,Hotelier>{
     void addHotelOrGuestHouse(HousesProperties house,int propertyId,int cityId);
     void selectPropertyId();
     void addRoomsToHotel(Room room);
+
 }

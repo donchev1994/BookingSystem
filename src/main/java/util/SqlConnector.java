@@ -10,7 +10,6 @@ public class SqlConnector {
 
     private static final String CONNECTION_STRING = "jdbc:mysql://localhost:3306/";
     private static final String BOOKING_NAME = "booking_db";
-    private static final String GET_ALL_CITIES = "SELECT id,name FROM cities";
     private static final String LOGIN = "SELECT `username`, `password` FROM users WHERE username = ? AND password = ?";
     private static final String UPDATE_PASSWORD = "UPDATE users SET password = ? WHERE username = ?;";
     private static final String GET_ROLE = "SELECT r.name FROM users as u JOIN roles r on r.id = u.role_id WHERE username = ?;";
@@ -103,14 +102,6 @@ public class SqlConnector {
 
         return status;
     }
-
-    public String getRoomsPriceByHotelName(String hotelName) {
-        String query = "SELECT h.name, r.type_of_room , r.price_per_day FROM rooms as r\n" +
-                "JOIN hotels h on h.id = r.hotel_id";
-
-        return query;
-    }
-
 
 
     public void viewPersonalUserData(){

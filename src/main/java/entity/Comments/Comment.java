@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class Comment extends AbstractEntity implements Identifiable<Long> {
 

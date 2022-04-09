@@ -2,6 +2,7 @@ package controller;
 
 import dao.UserRepository;
 import dao.impl.UserRepositoryImpl;
+import entity.users.Hotelier;
 import service.HotelierService;
 import service.impl.HotelierServiceImpl;
 import view.Menu;
@@ -37,7 +38,6 @@ public class HoteliersController {
                     hotelierService.addRoomsToHotel(room);
                     return "Room added";
                 })
-
 
         ));
         menu.show();

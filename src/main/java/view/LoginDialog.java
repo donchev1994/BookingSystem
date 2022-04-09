@@ -35,8 +35,10 @@ public class LoginDialog implements EntityDialog<String > {
                 adminController.init();
             } else if(connector.getRole(username).equals(ADMIN_USER.toString())){
                 var adminUserController = new AdminUsersController();
+                adminUserController.init();
             } else if(connector.getRole(username).equals(ADMIN_HOTELIER.toString())){
                 var adminHotelierController = new AdminHoteliersController();
+                adminHotelierController.init();
             } else if(connector.getRole(username).equals(HOTELIER.toString())){
                 var hotelierController = new HoteliersController();
                 hotelierController.init();
