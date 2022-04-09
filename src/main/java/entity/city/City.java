@@ -1,3 +1,4 @@
+
 package entity.city;
 
 
@@ -7,7 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @AllArgsConstructor
 public class City extends AbstractEntity{
 
@@ -15,3 +15,4 @@ public class City extends AbstractEntity{
     private String description;
 
 }
+

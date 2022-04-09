@@ -1,5 +1,8 @@
 package view;
 
+import java.sql.SQLException;
+
 public interface EntityDialog<E> {
-    E input();
+    E input() throws SQLException;
 }
+

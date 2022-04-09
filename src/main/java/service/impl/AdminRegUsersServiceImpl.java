@@ -1,3 +1,4 @@
+
 package service.impl;
 
 
@@ -6,11 +7,14 @@ import entity.users.AdminRegUsers;
 import exception.InvalidEntityDataException;
 import exception.NonexistentEntityException;
 import service.AdminRegUsersService;
+import util.SqlConnector;
 
 import java.util.Collection;
 
 
 public class AdminRegUsersServiceImpl implements AdminRegUsersService {
+
+    private SqlConnector connector = new SqlConnector();
 
 
     public AdminRegUsersServiceImpl(CrudRepository<Long, AdminRegUsers> genericRepository) {

@@ -6,8 +6,8 @@ import entity.AbstractEntity;
 import entity.enums.TypeOfRoom;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+//import javax.persistence.*;
+//import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 
@@ -22,5 +22,6 @@ public class Room extends AbstractEntity implements Identifiable<Long> {
     private double pricePerDay;
     //Array date to/from reservation
     List<Reservation> reservations;
+
 
 }

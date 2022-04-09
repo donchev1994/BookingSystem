@@ -1,3 +1,4 @@
+
 package util;
 
 import entity.hotelAndHouse.Properties;
@@ -50,3 +51,4 @@ public class HotelAndGuestHouseValidator {
         }
     }
 }
+

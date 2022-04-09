@@ -1,3 +1,4 @@
+
 package view;
 
 import exception.InvalidEntityDataException;
@@ -64,11 +65,9 @@ public class Menu {
             String result = null;
             try{
                 result = options.get(choice - 1).getCommand().execute();
-            } catch (InvalidEntityDataException e) {
+            } catch (InvalidEntityDataException | SQLException e) {
                 System.out.println("Error: " + e.getMessage());
 
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
             System.out.println(result);
             if(choice == options.size()){

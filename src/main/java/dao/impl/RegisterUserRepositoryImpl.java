@@ -1,3 +1,4 @@
+
 package dao.impl;
 
 import dao.RegisterUserRepository;
@@ -9,5 +10,8 @@ import java.sql.SQLException;
 
 
 public class RegisterUserRepositoryImpl extends CrudRepositoryImpl<Long, RegisteredUser> implements RegisterUserRepository {
+
+    SqlConnector connector = new SqlConnector();
+
 
 }

@@ -1,15 +1,16 @@
+
 package service.impl;
 
-import dao.CrudRepository;
 import dao.RegisterUserRepository;
 import entity.users.RegisteredUser;
-import exception.ConstraintViolationException;
 import exception.InvalidEntityDataException;
 import exception.NonexistentEntityException;
 import service.RegisterUserService;
 import util.SqlConnector;
 import util.UserValidator;
 
+
+import java.sql.SQLException;
 import java.util.Collection;
 
 
@@ -35,29 +36,50 @@ public class RegisterUserServiceImpl  implements RegisterUserService {
 
     @Override
     public RegisteredUser save(RegisteredUser entity) throws InvalidEntityDataException {
-        try {
-            userValidator.validate(entity);
-        } catch (ConstraintViolationException e) {
-            throw new InvalidEntityDataException(
-                    String.format("Error creating user  '%s'", entity.getFirstName()), e
-            );
-        }
-
-        return registerRepo.create(entity);
+        return connector.registerUser(
+                entity.getFirstName(),
+                entity.getLastName(),
+                entity.getUsername(),
+                entity.getPassword(),
+                entity.getEmail());
     }
 
     @Override
     public RegisteredUser update(RegisteredUser entity) {
-        return null;
+        return registerRepo.update(entity);
     }
 
     @Override
     public RegisteredUser delete(RegisteredUser entity) {
-        return null;
+        return registerRepo.delete(entity);
     }
 
     @Override
     public RegisteredUser findById(Long id) throws NonexistentEntityException {
         return registerRepo.findById(id);
+    }
+
+    @Override
+    public String getAllCities() {
+        try {
+            return connector.getAllCities();
+        } catch (SQLException e) {
+            return "Dont have added cities";
+        }
+    }
+
+    @Override
+    public String getCityById(Long id) {
+        return connector.getCity(id);
+    }
+
+    @Override
+    public String getAllHotelsByCity(String cityName) {
+        return connector.getAllHotels(cityName);
+    }
+
+    @Override
+    public boolean updatePassword(String username, String password) throws SQLException {
+     return connector.updatePassword(username,password);
     }
 }

@@ -1,11 +1,16 @@
+
 package service;
 
 
 import entity.users.RegisteredUser;
-import entity.users.User;
 
-import java.util.Collection;
+import java.sql.SQLException;
 
-public interface RegisterUserService extends GenericService<Long,RegisteredUser> {
+public interface RegisterUserService extends GenericService<Long, RegisteredUser> {
 
+    String getAllCities();
+    String getCityById(Long id);
+    String getAllHotelsByCity(String cityName);
+    boolean updatePassword(String username, String password) throws SQLException;
 }
+

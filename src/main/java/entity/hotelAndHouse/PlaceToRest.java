@@ -1,3 +1,4 @@
+
 package entity.hotelAndHouse;
 
 import entity.city.City;
