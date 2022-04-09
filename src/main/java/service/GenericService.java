@@ -1,19 +1,19 @@
 package service;
 
-import entity.users.Administrator;
+import entity.users.User;
 import exception.InvalidEntityDataException;
 import exception.NonexistentEntityException;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 public interface GenericService<K,V> {
-    Collection<V> getAll() throws NonexistentEntityException;
+    Collection<User> getAll() throws NonexistentEntityException;
 
-    V save(V entity) throws InvalidEntityDataException;
+    void save(V entity) throws InvalidEntityDataException, SQLException;
 
-    V update(V entity);
+    void update(V entity);
 
-    V delete(V entity);
+    void delete(V entity);
 
-    V findById(K id) throws NonexistentEntityException;
 }

@@ -11,9 +11,7 @@ import java.util.List;
 
 
 
-public class Hotel extends Properties implements Identifiable<Long> {
+public class Hotel extends HousesProperties implements Identifiable<Long> {
 
-    public Hotel(@NonNull String name, @NonNull String description, @NonNull PropertyType status, @NonNull String address, @NonNull City city, @NonNull List<Room> rooms) {
-        super(name, description, status, address, city, rooms);
-    }
+
 }

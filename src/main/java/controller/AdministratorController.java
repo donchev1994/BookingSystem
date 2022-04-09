@@ -1,8 +1,10 @@
 package controller;
 
-import dao.AdministratorRepository;
-import dao.impl.AdministratorRepositoryImpl;
-import entity.enums.Role;
+import dao.UserRepository;
+import dao.impl.UserRepositoryImpl;
+import entity.city.City;
+import entity.users.Administrator;
+import entity.users.User;
 import service.AdministratorService;
 import service.impl.AdministratorServiceImpl;
 import view.Menu;
@@ -14,7 +16,7 @@ import java.util.Scanner;
 
 public class AdministratorController {
     Scanner scanner = new Scanner(System.in);
-    AdministratorRepository ar = new AdministratorRepositoryImpl();
+    UserRepository ar = new UserRepositoryImpl();
     AdministratorService administratorService = new AdministratorServiceImpl(ar);
 
     public void init() {
@@ -38,8 +40,26 @@ public class AdministratorController {
                     administratorService.registerUser(user);
                     return String.format("User '%s' added successfully.",
                             user.getFirstName());
+                }),
+                new Menu.Option("Delete user by username: ", () -> {
+                    System.out.println("Enter username:");
+                    var username = scanner.nextLine();
+                    if(administratorService.deleteUser(username)){
+                        return "User with '" + username + "' successfully deleted";
+                    } else {
+                        return "Invalid username.";
+                    }
+                }),
+                new Menu.Option("View all users: ", () -> {
+                    StringBuilder sb= new StringBuilder();
+                    for (User user : administratorService.getAll()) {
+                        sb.append(user).append(System.lineSeparator());
+                    }
+                    return sb.toString();
                 })
+
         ));
+
         menu.show();
     }
 }

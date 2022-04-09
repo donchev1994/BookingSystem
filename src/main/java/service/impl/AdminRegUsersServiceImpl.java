@@ -3,46 +3,47 @@ package service.impl;
 
 
 import dao.CrudRepository;
+import dao.UserRepository;
 import entity.users.AdminRegUsers;
+import entity.users.User;
+import exception.EntityPersistenceException;
 import exception.InvalidEntityDataException;
 import exception.NonexistentEntityException;
 import service.AdminRegUsersService;
 import util.SqlConnector;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 
 public class AdminRegUsersServiceImpl implements AdminRegUsersService {
 
-    private SqlConnector connector = new SqlConnector();
+    private UserRepository userRepository;
 
 
-    public AdminRegUsersServiceImpl(CrudRepository<Long, AdminRegUsers> genericRepository) {
-        ;
+    @Override
+    public Collection<User> getAll() throws NonexistentEntityException {
+        return userRepository.read();
     }
 
     @Override
-    public Collection<AdminRegUsers> getAll() throws NonexistentEntityException {
-        return null;
+    public void save(AdminRegUsers entity) throws InvalidEntityDataException {
+        try {
+            userRepository.create(entity);
+        } catch (SQLException e) {
+            throw new EntityPersistenceException("Invalid entity.");
+        }
     }
 
     @Override
-    public AdminRegUsers save(AdminRegUsers entity) throws InvalidEntityDataException {
-        return null;
+    public void update(AdminRegUsers entity) {
+        userRepository.update(entity);
     }
 
     @Override
-    public AdminRegUsers update(AdminRegUsers entity) {
-        return null;
+    public void delete(AdminRegUsers entity) {
+        userRepository.delete(entity);
     }
 
-    @Override
-    public AdminRegUsers delete(AdminRegUsers entity) {
-        return null;
-    }
 
-    @Override
-    public AdminRegUsers findById(Long id) throws NonexistentEntityException {
-        return null;
-    }
 }

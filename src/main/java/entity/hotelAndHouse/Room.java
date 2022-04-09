@@ -18,10 +18,11 @@ import java.util.List;
 public class Room extends AbstractEntity implements Identifiable<Long> {
 
     private TypeOfRoom typeOfRoom;
-    private String description;
     private double pricePerDay;
     //Array date to/from reservation
     List<Reservation> reservations;
 
-
+    public Room(double pricePerDay) {
+        this.pricePerDay = pricePerDay;
+    }
 }

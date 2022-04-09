@@ -2,6 +2,7 @@
 package view;
 
 import exception.InvalidEntityDataException;
+import exception.NonexistentEntityException;
 import lombok.*;
 
 import java.sql.SQLException;
@@ -68,6 +69,8 @@ public class Menu {
             } catch (InvalidEntityDataException | SQLException e) {
                 System.out.println("Error: " + e.getMessage());
 
+            } catch (NonexistentEntityException e) {
+                e.printStackTrace();
             }
             System.out.println(result);
             if(choice == options.size()){

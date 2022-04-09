@@ -1,17 +1,21 @@
 
 import controller.UserController;
-import dao.RegisterUserRepository;
-import dao.impl.RegisterUserRepositoryImpl;
+import dao.UserRepository;
+import dao.impl.UserRepositoryImpl;
 import service.RegisterUserService;
 import service.impl.RegisterUserServiceImpl;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
-        RegisterUserRepository us = new RegisterUserRepositoryImpl();
+        UserRepository us = new UserRepositoryImpl();
         RegisterUserService userService = new RegisterUserServiceImpl(us);
 
         // user login - username: marian123 password: marian123

@@ -11,11 +11,11 @@ import java.util.List;
 
 public class UserController {
 
-    private RegisterUserService registerUserService;
+    private RegisterUserService userService;
 
 
     public UserController(RegisterUserService registerUserService) {
-        this.registerUserService = registerUserService;
+        this.userService = registerUserService;
     }
 
 
@@ -27,7 +27,7 @@ public class UserController {
                 }),
                 new Menu.Option("Register", () -> {
                     var user = new NewRegisteredUserDialog().input();
-                    registerUserService.save(user);
+                    userService.save(user);
                     return String.format("User '%s' added successfully.",
                             user.getFirstName());
                 })

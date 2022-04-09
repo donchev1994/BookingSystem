@@ -1,7 +1,7 @@
 
 package util;
 
-import entity.hotelAndHouse.Properties;
+import entity.hotelAndHouse.HousesProperties;
 import exception.ConstraintViolation;
 import exception.ConstraintViolationException;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class HotelAndGuestHouseValidator {
 
 
-    public void validate(Properties properties) throws ConstraintViolationException {
+    public void validate(HousesProperties properties) throws ConstraintViolationException {
         List<ConstraintViolation> violations = new ArrayList<>();
 
         if(properties.getName().trim().length() < 2 || properties.getName().trim().length() > 12){

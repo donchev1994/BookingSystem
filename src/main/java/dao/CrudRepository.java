@@ -1,15 +1,16 @@
 package dao;
 
 
+import entity.users.RegisteredUser;
 import exception.NonexistentEntityException;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 public interface CrudRepository<K, V extends Identifiable<K>>{
-    V create(V entity);
+    void create(V entity) throws SQLException;
     Collection<V> read() throws NonexistentEntityException;
-    V update(V entity);
-    V delete(V entity);
-    V findById(K id) throws NonexistentEntityException;
+    void update(V entity);
+    void delete(V entity);
 
 }

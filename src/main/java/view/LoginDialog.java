@@ -39,6 +39,7 @@ public class LoginDialog implements EntityDialog<String > {
                 var adminHotelierController = new AdminHoteliersController();
             } else if(connector.getRole(username).equals(HOTELIER.toString())){
                 var hotelierController = new HoteliersController();
+                hotelierController.init();
             }
             System.out.println("Login successfully.");
             return "";
