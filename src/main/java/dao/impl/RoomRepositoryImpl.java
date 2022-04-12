@@ -6,6 +6,7 @@ import entity.users.RegisteredUser;
 import entity.users.User;
 import exception.EntityPersistenceException;
 import exception.NonexistentEntityException;
+import util.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,23 +15,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class RoomRepositoryImpl  implements RoomRepository {
-    private static final String CONNECTION_STRING = "jdbc:mysql://localhost:3306/";
-    private static final String BOOKING_NAME = "booking_db";
+
     private static final String CREATE_ROOM = "INSERT INTO rooms (type_of_room, price_per_day) VALUES (?,?);";
     private static final String GET_ALL_ROOM = "SELECT * FROM rooms;";
     private static final String UPDATE_ROOM = "UPDATE rooms SET type_of_room=?,price_per_day=? WHERE id=?;";
     private static final String DELETE_ROOM = "DELETE FROM rooms WHERE id=?;";
 
-    private Connection connection;
-
-    {
-        try {
-            connection = DriverManager.getConnection
-                    (CONNECTION_STRING + BOOKING_NAME, "root", "032580");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    static Connection connection = DatabaseConnection.getConnection();
 
     @Override
     public void create(Room entity) throws SQLException {

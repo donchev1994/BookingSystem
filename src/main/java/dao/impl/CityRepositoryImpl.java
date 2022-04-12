@@ -3,14 +3,13 @@ package dao.impl;
 import dao.CityRepository;
 import entity.city.City;
 import exception.EntityPersistenceException;
+import util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class CityRepositoryImpl implements CityRepository {
-    private static final String CONNECTION_STRING = "jdbc:mysql://localhost:3306/";
-    private static final String BOOKING_NAME = "booking_db";
     private static final String ADD_CITY = "INSERT INTO cities (name, description) VALUES (?,?)";
     private static final String GET_ALL_CITIES = "SELECT name ,description FROM cities";
     private static final String DELETE_CITY = "DELETE FROM cities WHERE name=?";
@@ -18,16 +17,7 @@ public class CityRepositoryImpl implements CityRepository {
 
 
 
-    Connection connection;
-
-    {
-        try {
-            connection = DriverManager.getConnection
-                    (CONNECTION_STRING + BOOKING_NAME, "root", "032580");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    static Connection connection = DatabaseConnection.getConnection();
 
 
     @Override

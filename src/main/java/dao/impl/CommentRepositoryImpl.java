@@ -5,6 +5,7 @@ import entity.Comments.Comment;
 import entity.users.User;
 import exception.EntityPersistenceException;
 import exception.NonexistentEntityException;
+import util.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,25 +15,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class CommentRepositoryImpl implements CommentRepository {
-    private static final String CONNECTION_STRING = "jdbc:mysql://localhost:3306/";
-    private static final String BOOKING_NAME = "booking_db";
+
     private static final String CREATE_COMMENT = "INSERT INTO comments(description) VALUES (?);";
     private static final String GET_ALL_COMMENT = "SELECT * FROM comments";
     private static final String UPDATE_COMMENT = "UPDATE comments SET description=?;";
     private static final String DELETE_COMMENT = "DELETE FROM comments WHERE id=?;";
 
-    private Connection connection;
-
-
-
-        {
-        try {
-            connection = DriverManager.getConnection
-                    (CONNECTION_STRING + BOOKING_NAME, "root", "032580");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    static Connection connection = DatabaseConnection.getConnection();
 
 
 

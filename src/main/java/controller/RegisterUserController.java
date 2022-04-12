@@ -33,7 +33,7 @@ public class RegisterUserController {
                     var cityName = scanner.nextLine();
                     return userService.getAllHotelsByCity(cityName);
                 }),
-                new Menu.Option("Get all rooms from hotel by name: ", () -> {
+                new Menu.Option("Get all rooms by chosen hotel: ", () -> {
                     System.out.println("Enter hotel name: ");
                     var hotelName = scanner.nextLine();
                     userService.getTypeAndPriceForRoom(hotelName);

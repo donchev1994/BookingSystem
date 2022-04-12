@@ -18,7 +18,8 @@ public class Main {
         UserRepository us = new UserRepositoryImpl();
         RegisterUserService userService = new RegisterUserServiceImpl(us);
 
-        // user login - username: marian123 password: marian123
+        // user login - username: vankata94 password: Vankata94!
+        // admin login - username: admin password: admin
         var userController = new UserController(userService);
         userController.init();
 

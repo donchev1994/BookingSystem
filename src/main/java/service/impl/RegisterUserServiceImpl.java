@@ -43,7 +43,6 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 
     public RegisterUserServiceImpl(UserRepository registerRepo) {
         this.userRepository = registerRepo;
-
     }
 
 
@@ -80,7 +79,6 @@ public class RegisterUserServiceImpl implements RegisterUserService {
                 sb.append(resultSet.getString("name"));
                 sb.append(System.lineSeparator());
             }
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,7 +104,7 @@ public class RegisterUserServiceImpl implements RegisterUserService {
                         .append(System.lineSeparator());
                 sb.append(resultSet.getString("description"));
             }
-            connection.close();
+
             return sb.toString();
 
         } catch (SQLException e) {
@@ -139,7 +137,7 @@ public class RegisterUserServiceImpl implements RegisterUserService {
                 sb.append("---------------------");
                 sb.append(System.lineSeparator());
             }
-            connection.close();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -169,7 +167,7 @@ public class RegisterUserServiceImpl implements RegisterUserService {
                         .append(System.lineSeparator());
             }
             System.out.println(sb);
-            connection.close();
+
         } catch (SQLException e) {
             throw new EntityPersistenceException("Invalid house name.");
         }
