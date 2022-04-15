@@ -1,7 +1,7 @@
 package controller;
 
-import dao.UserRepository;
-import dao.impl.UserRepositoryImpl;
+import dao.adminhoteliers.AdminHoteliersDao;
+import dao.adminhoteliers.AdminHoteliersDaoImpl;
 import service.AdminHoteliersService;
 import service.impl.AdminHoteliersServiceImpl;
 import view.Menu;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class AdminHoteliersController {
     Scanner scanner = new Scanner(System.in);
-    UserRepository ar = new UserRepositoryImpl();
+    AdminHoteliersDao ar = new AdminHoteliersDaoImpl();
     AdminHoteliersService hotelierService = new AdminHoteliersServiceImpl(ar);
 
      public void init() {

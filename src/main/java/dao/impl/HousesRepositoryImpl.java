@@ -2,13 +2,11 @@ package dao.impl;
 
 import dao.HousesRepository;
 import entity.hotelAndHouse.HousesProperties;
-import entity.users.User;
 import exception.EntityPersistenceException;
 import exception.NonexistentEntityException;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,13 +22,15 @@ public class HousesRepositoryImpl implements HousesRepository {
 
 
     @Override
-    public void create(HousesProperties entity) throws SQLException {
+    public void create(HousesProperties entity)  {
         try(var statement = connection.prepareStatement(CREATE_HOUSE)){
             statement.setString(1,entity.getName());
             statement.setString(2,entity.getDescription());
             statement.setInt(3,entity.getStars());
             statement.setString(4,entity.getAddress());
             statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -54,8 +54,9 @@ public class HousesRepositoryImpl implements HousesRepository {
     }
 
     @Override
-    public void update(HousesProperties entity) {
+    public boolean update(HousesProperties entity) {
 
+        return false;
     }
 
     @Override

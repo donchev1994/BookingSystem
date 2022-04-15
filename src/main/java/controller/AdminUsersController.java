@@ -1,8 +1,8 @@
 package controller;
 
 
-import dao.UserRepository;
-import dao.impl.UserRepositoryImpl;
+import dao.adminusers.AdminRegUsersDao;
+import dao.adminusers.AdminRegUsersDaoImpl;
 import service.AdminRegUsersService;
 import service.impl.AdminRegUsersServiceImpl;
 
@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class AdminUsersController {
 
     Scanner scanner = new Scanner(System.in);
-    UserRepository ar = new UserRepositoryImpl();
+    AdminRegUsersDao ar = new AdminRegUsersDaoImpl();
     AdminRegUsersService adminRegUsersService = new AdminRegUsersServiceImpl(ar);
 
     public void init() {

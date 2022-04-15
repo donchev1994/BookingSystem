@@ -1,9 +1,7 @@
 package controller;
 
-import dao.UserRepository;
-import dao.impl.UserRepositoryImpl;
-import entity.city.City;
-import entity.users.Administrator;
+import dao.administrator.AdministratorDao;
+import dao.administrator.AdministratorDaoImpl;
 import entity.users.User;
 import service.AdministratorService;
 import service.impl.AdministratorServiceImpl;
@@ -16,7 +14,7 @@ import java.util.Scanner;
 
 public class AdministratorController {
     Scanner scanner = new Scanner(System.in);
-    UserRepository ar = new UserRepositoryImpl();
+    AdministratorDao ar = new AdministratorDaoImpl();
     AdministratorService administratorService = new AdministratorServiceImpl(ar);
 
     public void init() {

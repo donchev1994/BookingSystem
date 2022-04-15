@@ -3,10 +3,8 @@ package view;
 
 import controller.*;
 
-import entity.users.User;
-import util.SqlConnector;
+import dao.impl.LoginDao;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -15,7 +13,7 @@ import static entity.enums.Role.*;
 
 public class LoginDialog implements EntityDialog<String > {
     private static Scanner scanner = new Scanner(System.in);
-    private SqlConnector connector = new SqlConnector();
+    private LoginDao connector = new LoginDao();
 
 
 

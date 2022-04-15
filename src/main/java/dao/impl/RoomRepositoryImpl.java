@@ -2,14 +2,11 @@ package dao.impl;
 
 import dao.RoomRepository;
 import entity.hotelAndHouse.Room;
-import entity.users.RegisteredUser;
-import entity.users.User;
 import exception.EntityPersistenceException;
 import exception.NonexistentEntityException;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,11 +21,13 @@ public class RoomRepositoryImpl  implements RoomRepository {
     static Connection connection = DatabaseConnection.getConnection();
 
     @Override
-    public void create(Room entity) throws SQLException {
+    public void create(Room entity)  {
         try (var stmt = connection.prepareStatement(CREATE_ROOM)) {
             stmt.setString(1,entity.getTypeOfRoom().toString());
             stmt.setDouble(2,entity.getPricePerDay());
             stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -49,7 +48,7 @@ public class RoomRepositoryImpl  implements RoomRepository {
     }
 
     @Override
-    public void update(Room entity) {
+    public boolean update(Room entity) {
         try(var statement = connection.prepareStatement(UPDATE_ROOM)) {
             statement.setString(1,entity.getTypeOfRoom().toString());
             statement.setDouble(2,entity.getPricePerDay());
@@ -57,6 +56,7 @@ public class RoomRepositoryImpl  implements RoomRepository {
         } catch (SQLException e) {
             throw new EntityPersistenceException("Invalid room property.");
         }
+        return false;
     }
 
     @Override

@@ -2,14 +2,13 @@ package dao.impl;
 
 
 import dao.CrudRepository;
+import dao.Identifiable;
 import dao.UserRepository;
-import entity.users.RegisteredUser;
 import entity.users.User;
 import exception.EntityPersistenceException;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,12 +16,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
-public class UserRepositoryImpl implements CrudRepository<Long, User>, UserRepository {
+public abstract class UserRepositoryImpl implements CrudRepository<Long,User>,UserRepository {
     private static final String REGISTER_USER = "INSERT INTO users (first_name, last_name, username, password, email, registeredDate ) " +
             "VALUES (?,?,?,?,?,?)";
     private static final String SELECT_ALL_USERS = "SELECT u.first_name,u.last_name,u.username,u.password,u.registeredDate,r.name FROM users as u\n" +
             "JOIN roles r on r.id = u.role_id;";
-    private static final String UPDATE_USER = "UPDATE users SET first_name=?,last_name=?,password=?,email=? WHERE username=?;";
+    private static final String UPDATE_USER = "UPDATE users SET first_name=?,last_name=?,password=?,email=? ,role=?;";
     private static final String DELETE_USER = "DELETE FROM users WHERE username=?";
 
     static Connection conn = DatabaseConnection.getConnection();
@@ -32,7 +31,7 @@ public class UserRepositoryImpl implements CrudRepository<Long, User>, UserRepos
 
 
     @Override
-    public void create(User entity) throws SQLException {
+    public void create(User entity) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         try (var stmt = conn.prepareStatement(REGISTER_USER)) {
@@ -73,16 +72,15 @@ public class UserRepositoryImpl implements CrudRepository<Long, User>, UserRepos
     }
 
     @Override
-    public void update(User entity) {
+    public boolean update(User entity) {
         try(var statement = conn.prepareStatement(UPDATE_USER)) {
             statement.setString(1,entity.getFirstName());
             statement.setString(2,entity.getLastName());
             statement.setString(3,entity.getPassword());
             statement.setString(4,entity.getEmail());
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("An existing user was updated succesfully!");
-            }
+            statement.setString(5, String.valueOf(entity.getRole()));
+            statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             throw new EntityPersistenceException("Invalid entity");
         }
@@ -97,4 +95,5 @@ public class UserRepositoryImpl implements CrudRepository<Long, User>, UserRepos
             throw new EntityPersistenceException("Invalid user for delete");
         }
     }
+
 }

@@ -17,7 +17,7 @@ public class DatabaseConnection {
 
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(CONNECTION_STRING + BOOKING_NAME,USERNAME,PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

@@ -21,12 +21,14 @@ public class CityRepositoryImpl implements CityRepository {
 
 
     @Override
-    public void  create(City entity) throws SQLException {
+    public void  create(City entity) {
         try (var statement = connection.prepareStatement(ADD_CITY)) {
             statement.setString(1, entity.getName());
             statement.setString(2, entity.getDescription());
 
             statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -48,13 +50,14 @@ public class CityRepositoryImpl implements CityRepository {
     }
 
     @Override
-    public void update(City entity) {
+    public boolean update(City entity) {
         try(var statement = connection.prepareStatement(UPDATE)){
             statement.setString(1,entity.getName());
             statement.setString(2,entity.getDescription());
         } catch (SQLException e) {
             throw new EntityPersistenceException("Invalid city properties.");
         }
+        return false;
     }
 
     @Override

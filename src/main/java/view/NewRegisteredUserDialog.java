@@ -1,8 +1,8 @@
 package view;
 
 
+import dao.impl.RegisterDao;
 import entity.users.RegisteredUser;
-import util.SqlConnector;
 
 
 import java.util.Scanner;
@@ -13,7 +13,8 @@ public class NewRegisteredUserDialog implements EntityDialog<RegisteredUser> {
     private static final String INVALID_FIRST_LAST_NAME_PATTERN = "(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$";
     private static final String VALIDATE_PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,13})";
     private static final String VALIDATE_EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&'*+\\=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-    SqlConnector connector = new SqlConnector();
+    RegisterDao registerDao = new RegisterDao();
+
 
 
     @Override
@@ -47,7 +48,7 @@ public class NewRegisteredUserDialog implements EntityDialog<RegisteredUser> {
             var ans = sc.nextLine();
             if (ans.length() < 5 || ans.length() > 20) {
                 System.out.println("Username length should be between 5 and 20 characters");
-            }else if(!connector.isUsernameRegistered(user.getUsername())){
+            }else if(!registerDao.isUsernameRegistered(user.getUsername())){
                 System.out.println("Username already exist.");
             } else {
                 user.setUsername(ans);
@@ -69,7 +70,7 @@ public class NewRegisteredUserDialog implements EntityDialog<RegisteredUser> {
             var ans = sc.nextLine();
             if (ans.length() < 5 || ans.length() > 20) {
                 System.out.println("Email length should be between 5 and 20 characters");
-            }else if(!connector.isEmailRegistered(user.getEmail())) {
+            }else if(!registerDao.isEmailRegistered(user.getEmail())) {
                 System.out.println("User with email : " + user.getEmail() + " - already exist.");
             }else if(!ans.matches(VALIDATE_EMAIL_PATTERN)){
                 System.out.println("Invalid email.");
