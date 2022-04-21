@@ -93,8 +93,8 @@ class UserRepositoryImplTest {
     void readUser() throws NonexistentEntityException {
         Collection<User> users = userDao.read();
         for (User user : users) {
-            if(user.getUsername().equals("yasen92")){
-                assertEquals(user.getUsername(),"yasen92");
+            if (user.getUsername().equals("yasen92")) {
+                assertEquals(user.getUsername(), "yasen92");
             }
         }
     }
