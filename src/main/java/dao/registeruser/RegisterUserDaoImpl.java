@@ -141,6 +141,11 @@ public class RegisterUserDaoImpl extends UserRepositoryImpl implements RegisterU
                         .append("lv.")
                         .append(System.lineSeparator());
             }
+
+            if(sb.isEmpty()){
+                throw new EntityPersistenceException("Invalid house name:");
+            }
+
             System.out.println(sb);
 
         } catch (SQLException e) {

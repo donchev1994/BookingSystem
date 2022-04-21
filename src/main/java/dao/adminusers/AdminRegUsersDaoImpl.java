@@ -11,7 +11,14 @@ import java.sql.SQLException;
 public class AdminRegUsersDaoImpl extends UserRepositoryImpl implements AdminRegUsersDao {
     private static final String GET_ALL_USERS = "SELECT * FROM users WHERE role_id = 5";
 
-    static Connection connection = DatabaseConnection.getConnection();
+     Connection connection = DatabaseConnection.getConnection();
+
+    public AdminRegUsersDaoImpl() {
+    }
+
+    public AdminRegUsersDaoImpl(Connection connection) {
+        this.connection = connection;
+    }
 
     @Override
     public void viewAllUsers() {

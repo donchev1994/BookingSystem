@@ -71,7 +71,7 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 
     @Override
     public void getTypeAndPriceForRoom(String houseName) {
-
+        registerUserDao.getTypeAndPriceForRoom(houseName);
     }
 
     @Override

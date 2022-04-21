@@ -9,30 +9,36 @@ import exception.EntityPersistenceException;
 import util.DatabaseConnection;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
 
-public abstract class UserRepositoryImpl implements CrudRepository<Long,User>,UserRepository {
+public  class UserRepositoryImpl implements CrudRepository<Long,User>,UserRepository {
     private static final String REGISTER_USER = "INSERT INTO users (first_name, last_name, username, password, email, registeredDate ) " +
             "VALUES (?,?,?,?,?,?)";
     private static final String SELECT_ALL_USERS = "SELECT u.first_name,u.last_name,u.username,u.password,u.registeredDate,r.name FROM users as u\n" +
             "JOIN roles r on r.id = u.role_id;";
-    private static final String UPDATE_USER = "UPDATE users SET first_name=?,last_name=?,password=?,email=? ,role=?;";
+    private static final String UPDATE_USER = "UPDATE users SET first_name=?,last_name=?,password=?,email=? WHERE username=?;";
     private static final String DELETE_USER = "DELETE FROM users WHERE username=?";
 
-    static Connection conn = DatabaseConnection.getConnection();
+    private static final String GET_USER_BY_USERNAME = "SELECT * FROM users WHERE username=?";
+
+    Connection conn = DatabaseConnection.getConnection();
 
     public UserRepositoryImpl() {
     }
 
+    public UserRepositoryImpl(Connection conn) {
+        this.conn = conn;
+    }
 
     @Override
     public void create(User entity) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         try (var stmt = conn.prepareStatement(REGISTER_USER)) {
 
@@ -78,12 +84,14 @@ public abstract class UserRepositoryImpl implements CrudRepository<Long,User>,Us
             statement.setString(2,entity.getLastName());
             statement.setString(3,entity.getPassword());
             statement.setString(4,entity.getEmail());
-            statement.setString(5, String.valueOf(entity.getRole()));
+            statement.setString(5,entity.getUsername());
             statement.executeUpdate();
-            return true;
+//            return true;
         } catch (SQLException e) {
             throw new EntityPersistenceException("Invalid entity");
         }
+
+        return true;
     }
 
     @Override
@@ -94,6 +102,25 @@ public abstract class UserRepositoryImpl implements CrudRepository<Long,User>,Us
         } catch (SQLException e) {
             throw new EntityPersistenceException("Invalid user for delete");
         }
+    }
+
+    public User getUserByUsername(String username) {
+        User user = new User();
+        try (var stmt = conn.prepareStatement(GET_USER_BY_USERNAME)){
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setUsername(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                user.setEmail(rs.getString(6));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
 
 }

@@ -16,7 +16,7 @@ public class Main {
         RegisterUserDao us = new RegisterUserDaoImpl();
         RegisterUserService userService = new RegisterUserServiceImpl(us);
 
-        // user login - username: vankata94 password: Vankata94!
+        // user login - username: vankata94 password: Georgi944!
         // admin login - username: admin password: admin
         var userController = new UserController(userService);
         userController.init();

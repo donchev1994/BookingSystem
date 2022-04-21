@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.32">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.38">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -1023,10 +1023,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <column id="295" parent="286" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="296" parent="286" name="name">
       <DataType>varchar(20)|0s</DataType>
@@ -1044,10 +1044,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Primary>1</Primary>
     </key>
     <column id="299" parent="287" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="300" parent="287" name="description">
       <DataType>varchar(150)|0s</DataType>
@@ -1090,10 +1090,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Primary>1</Primary>
     </key>
     <column id="309" parent="288" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="310" parent="288" name="name">
       <DataType>varchar(40)|0s</DataType>
@@ -1160,10 +1160,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Primary>1</Primary>
     </key>
     <column id="324" parent="289" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="325" parent="289" name="typeName">
       <DataType>varchar(20)|0s</DataType>
@@ -1176,10 +1176,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Primary>1</Primary>
     </key>
     <column id="327" parent="290" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="328" parent="290" name="start_day">
       <DataType>date|0s</DataType>
@@ -1197,160 +1197,173 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <DataType>decimal(10,2 digit)|0s</DataType>
       <Position>5</Position>
     </column>
-    <foreign-key id="332" parent="290" name="fk_reservation_users">
+    <column id="332" parent="290" name="houses_id">
+      <DataType>int|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="333" parent="290" name="fk_reservation_users">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <index id="333" parent="290" name="fk_reservation_users">
-      <ColNames>user_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="334" parent="290" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-    </key>
-    <column id="335" parent="291" name="id">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="336" parent="291" name="name">
-      <DataType>varchar(20)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <key id="337" parent="291" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-    </key>
-    <column id="338" parent="292" name="id">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="339" parent="292" name="type_of_room">
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="340" parent="292" name="price_per_day">
-      <DataType>double|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="341" parent="292" name="houses_id">
-      <DataType>int|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <foreign-key id="342" parent="292" name="fk_rooms_houses">
+    <foreign-key id="334" parent="290" name="fk_reservation_houses">
       <ColNames>houses_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>houses</RefTableName>
     </foreign-key>
-    <index id="343" parent="292" name="fk_rooms_houses">
+    <index id="335" parent="290" name="fk_reservation_users">
+      <ColNames>user_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="336" parent="290" name="fk_reservation_houses">
       <ColNames>houses_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="344" parent="292" name="PRIMARY">
+    <key id="337" parent="290" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="345" parent="293" name="room_id">
+    <column id="338" parent="291" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="346" parent="293" name="reservations_id">
+    <column id="339" parent="291" name="name">
+      <DataType>varchar(20)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <key id="340" parent="291" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="341" parent="292" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="342" parent="292" name="type_of_room">
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="343" parent="292" name="price_per_day">
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="344" parent="292" name="houses_id">
+      <DataType>int|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="345" parent="292" name="fk_rooms_houses">
+      <ColNames>houses_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>houses</RefTableName>
+    </foreign-key>
+    <index id="346" parent="292" name="fk_rooms_houses">
+      <ColNames>houses_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="347" parent="292" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="348" parent="293" name="room_id">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="349" parent="293" name="reservations_id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="347" parent="293" name="fk_rooms_reservations_rooms">
+    <foreign-key id="350" parent="293" name="fk_rooms_reservations_rooms">
       <ColNames>room_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>rooms</RefTableName>
     </foreign-key>
-    <foreign-key id="348" parent="293" name="fk_rooms_reservations_reservations">
+    <foreign-key id="351" parent="293" name="fk_rooms_reservations_reservations">
       <ColNames>reservations_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>reservations</RefTableName>
     </foreign-key>
-    <index id="349" parent="293" name="fk_rooms_reservations_reservations">
+    <index id="352" parent="293" name="fk_rooms_reservations_reservations">
       <ColNames>reservations_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="350" parent="293" name="PRIMARY">
+    <key id="353" parent="293" name="PRIMARY">
       <ColNames>room_id
 reservations_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="351" parent="294" name="id">
+    <column id="354" parent="294" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="352" parent="294" name="first_name">
+    <column id="355" parent="294" name="first_name">
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="353" parent="294" name="last_name">
+    <column id="356" parent="294" name="last_name">
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="354" parent="294" name="username">
+    <column id="357" parent="294" name="username">
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="355" parent="294" name="password">
+    <column id="358" parent="294" name="password">
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="356" parent="294" name="email">
+    <column id="359" parent="294" name="email">
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="357" parent="294" name="registeredDate">
+    <column id="360" parent="294" name="registeredDate">
       <DataType>datetime|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="358" parent="294" name="role_id">
+    <column id="361" parent="294" name="role_id">
       <DataType>int|0s</DataType>
       <DefaultExpression>5</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <foreign-key id="359" parent="294" name="fk_users_roles">
+    <foreign-key id="362" parent="294" name="fk_users_roles">
       <ColNames>role_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>roles</RefTableName>
     </foreign-key>
-    <index id="360" parent="294" name="users_id_uindex">
+    <index id="363" parent="294" name="users_id_uindex">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="361" parent="294" name="fk_users_roles">
+    <index id="364" parent="294" name="fk_users_roles">
       <ColNames>role_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="362" parent="294" name="PRIMARY">
+    <key id="365" parent="294" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="363" parent="294" name="users_id_uindex">
+    <key id="366" parent="294" name="users_id_uindex">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>users_id_uindex</UnderlyingIndexName>
     </key>
